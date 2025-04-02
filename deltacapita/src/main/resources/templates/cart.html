@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Item List</title>
+</head>
+<body>
+
+
+<h2>Current Offers On Products </h2>
+
+<ol>
+	<h3>Melons are 50p each, but are available as ‘buy one get one free’</h3>
+	<h3>Limes are 15p each, but are available in a ‘three for the price of two’ offer</h3>
+	<h3>Apples are 35p each</h3>
+	<h3>Bananas are 20p each</h3>
+</ol>
+	
+	<h3>Items</h3>
+	<form method="post" action="add-items">
+		<select id="fruit" name="productName">
+			<option value="Apple">Apple</option>
+			<option value="Banana">Banana</option>
+			<option value="Melon">Melon</option>
+			<option value="Lime">Lime</option>
+		</select> <input type="number" name="quantity" placeholder="Quantity" />
+		<button type="submit">Add Item And Calculate Price</button>
+	</form>
+	<br/>
+	<br/>
+	
+	<br/>
+	
+	<table border="1">
+		<tr>
+			<th>Items</th>
+			<th>Quantity</th>
+			<th>Cost</th>
+		</tr>
+		<tr th:each="cart : ${items}" th:with="fruit= ${cart.productName}, quantity= ${cart.quantity}">
+			<td th:text="${cart.productName}"></td>
+			<td th:text="${cart.quantity}"></td>
+			
+			<td th:text="${mapOfFruits.get(fruit) * quantity }"></td>
+		</tr>
+	</table>
+	
+	<h3> Total Price after discount :<h3 th:text="${afterDiscPrice}" > </h3></h3>
+</body>
+</html>
